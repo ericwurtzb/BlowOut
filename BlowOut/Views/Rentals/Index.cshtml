@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BlowOut.Models.Rental>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Instrument Rentals</h2>
+<br />
+<div class="container" style="display: flex; flex-wrap: wrap;">
+    <div class="row text-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="@item.picture" />
+                    <div class="caption">
+                        <h4>@item.rentalName</h4>
+                        <br />
+                        @Html.ActionLink("Details", "Details", new { id = item.rentalID })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
