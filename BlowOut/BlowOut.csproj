@@ -182,6 +182,7 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Contact\Email.cshtml" />
     <Content Include="Views\Rentals\Index.cshtml" />
+    <Content Include="Views\Rentals\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

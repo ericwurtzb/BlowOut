@@ -29,7 +29,7 @@ namespace BlowOut.Controllers
         // GET: Rentals/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(rentalList.Find(x => x.rentalID == id));
         }
 
         // GET: Rentals/Create

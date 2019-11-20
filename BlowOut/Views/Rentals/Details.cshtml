@@ -1,0 +1,80 @@
+﻿@model BlowOut.Models.Rental
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details for @Html.DisplayFor(model => model.rentalName)</h2>
+
+<div>
+    <hr />
+    <img src="@Html.DisplayFor(model => model.picture)" alt="@Html.DisplayNameFor(model => model.picture)" style="width:30%;" align="left"/>
+    <br clear="right" />
+    <div>
+
+        <p>
+            <strong>@Html.DisplayNameFor(model => model.rentalName)</strong>
+        </p>
+
+        <p>
+            @Html.DisplayFor(model => model.rentalName)
+        </p>
+
+        <div style="display: inline-block">
+            <p><strong>New Price</strong></p>
+            <input type="checkbox" name="NewPrice" value="new" id="newCheck" />
+        </div>
+        <div style="display: inline-block">
+             <p><strong>Used Price</strong></p>
+            <input type="checkbox" name="UsedPrice" value="used" id="usedCheck" />
+        </div>
+        
+        <div style="display: none" id="newText">
+            <p>
+                New: $@Html.DisplayFor(model => model.newPrice)
+            </p>
+        </div>
+
+        <div style="display: none" id="usedText">
+
+            <p>
+                Used: $@Html.DisplayFor(model => model.usedPrice)
+            </p>
+        </div>
+
+    </div>
+</div>
+<br />
+<br />
+<br />
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<script type="text/javascript">
+    var newCheck = document.getElementById("newCheck")
+    var usedCheck = document.getElementById("usedCheck")
+
+    newCheck.addEventListener('change', newClick)
+    usedCheck.addEventListener('change', usedClick)
+    function newClick() {
+        if (newCheck.checked == true) {
+            document.getElementById("newText").style.display = "block"
+        }
+        else {
+            document.getElementById("newText").style.display = "none"
+        }
+    }
+
+    function usedClick() {
+        if (usedCheck.checked == true) {
+            document.getElementById("usedText").style.display = "block"
+        }
+        else {
+            document.getElementById("usedText").style.display = "none"
+        }
+    }
+
+
+
+</script>
