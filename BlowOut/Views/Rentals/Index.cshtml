@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BlowOut.Models.Rental>
+﻿
+@model IEnumerable<BlowOut.Models.Rental>
 
 @{
     ViewBag.Title = "Index";
@@ -12,9 +13,9 @@
         {
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
-                    <img src="@item.picture" />
+                    <img src="@item.Picture" />
                     <div class="caption">
-                        <h4>@item.rentalName</h4>
+                        <h4>@item.RentalName</h4>
                         <br />
                         @Html.ActionLink("Details", "Details", new { id = item.rentalID })
                     </div>

@@ -11,107 +11,117 @@ using BlowOut.Models;
 
 namespace BlowOut.Controllers
 {
-    public class RentalsController : Controller
+    public class ClientsController : Controller
     {
         private BlowOutContext db = new BlowOutContext();
 
-        // GET: Rentals
+        // GET: Clients
         public ActionResult Index()
         {
-            return View(db.Rentals.ToList());
+            return View(db.Clients.ToList());
         }
 
-        // GET: Rentals/Details/5
+        // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rental rental = db.Rentals.Find(id);
-            if (rental == null)
+            Client client = db.Clients.Find(id);
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(rental);
+            return View(client);
         }
 
-        // GET: Rentals/Create
-        public ActionResult Create()
+        // GET: Clients/Create
+        public ActionResult Create(int ID)
         {
+            //TempData["RentalID"] = ID;
             return View();
         }
 
-        // POST: Rentals/Create
+        // POST: Clients/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "rentalID,RentalName,Type,Price,Picture,ClientID")] Rental rental)
+        public ActionResult Create([Bind(Include = "ClientID,FirstName,LastName,Address,City,State,Zip,Email,Phone")] Client client, int ID)
         {
             if (ModelState.IsValid)
             {
-                db.Rentals.Add(rental);
+                client.ClientID = db.Clients.Count() + 1;
+                db.Clients.Add(client);
+                db.Rentals.Find(ID).ClientID = client.ClientID;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Summary", new { RentalID = ID, ClientsID = client.ClientID});
             }
 
+            return View(client);
+        }
+
+        public ActionResult Summary(int RentalID, int ClientsID)
+        {
+            ViewBag.Name = db.Clients.Find(ClientsID).FirstName;
+            Rental rental = db.Rentals.Find(RentalID);
             return View(rental);
         }
 
-        // GET: Rentals/Edit/5
+        // GET: Clients/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rental rental = db.Rentals.Find(id);
-            if (rental == null)
+            Client client = db.Clients.Find(id);
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(rental);
+            return View(client);
         }
 
-        // POST: Rentals/Edit/5
+        // POST: Clients/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "rentalID,RentalName,Type,Price,Picture,ClientID")] Rental rental)
+        public ActionResult Edit([Bind(Include = "ClientID,FirstName,LastName,Address,City,State,Zip,Email,Phone")] Client client)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(rental).State = EntityState.Modified;
+                db.Entry(client).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(rental);
+            return View(client);
         }
 
-        // GET: Rentals/Delete/5
+        // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Rental rental = db.Rentals.Find(id);
-            if (rental == null)
+            Client client = db.Clients.Find(id);
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(rental);
+            return View(client);
         }
 
-        // POST: Rentals/Delete/5
+        // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Rental rental = db.Rentals.Find(id);
-            db.Rentals.Remove(rental);
+            Client client = db.Clients.Find(id);
+            db.Clients.Remove(client);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

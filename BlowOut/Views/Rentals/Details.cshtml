@@ -4,20 +4,20 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details for @Html.DisplayFor(model => model.rentalName)</h2>
+<h2>Details for @Html.DisplayFor(model => model.RentalName)</h2>
 
 <div>
     <hr />
-    <img src="@Html.DisplayFor(model => model.picture)" alt="@Html.DisplayNameFor(model => model.picture)" style="width:30%;" align="left"/>
+    <img src="@Html.DisplayFor(model => model.Picture)" alt="@Html.DisplayNameFor(model => model.Picture)" style="width:30%;" align="left" />
     <br clear="right" />
     <div>
 
         <p>
-            <strong>@Html.DisplayNameFor(model => model.rentalName)</strong>
+            <strong>@Html.DisplayNameFor(model => model.RentalName)</strong>
         </p>
 
         <p>
-            @Html.DisplayFor(model => model.rentalName)
+            @Html.DisplayFor(model => model.RentalName)
         </p>
 
         <div style="display: inline-block">
@@ -25,20 +25,20 @@
             <input type="checkbox" name="NewPrice" value="new" id="newCheck" />
         </div>
         <div style="display: inline-block">
-             <p><strong>Used Price</strong></p>
+            <p><strong>Used Price</strong></p>
             <input type="checkbox" name="UsedPrice" value="used" id="usedCheck" />
         </div>
-        
+
         <div style="display: none" id="newText">
             <p>
-                New: $@Html.DisplayFor(model => model.newPrice)
+                New: $@Html.DisplayFor(model => model.Type)
             </p>
         </div>
 
         <div style="display: none" id="usedText">
 
             <p>
-                Used: $@Html.DisplayFor(model => model.usedPrice)
+                Used: $@Html.DisplayFor(model => model.Price)
             </p>
         </div>
 
@@ -50,11 +50,16 @@
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+<p>
+    @Html.ActionLink("Rent this Instrument", "Create", "Clients", new { id = Model.rentalID }, null)
+</p>
+<p>
+    Current renter is Customer #@Html.DisplayFor(model => model.ClientID)
+</p>
 
 <script type="text/javascript">
     var newCheck = document.getElementById("newCheck")
     var usedCheck = document.getElementById("usedCheck")
-
     newCheck.addEventListener('change', newClick)
     usedCheck.addEventListener('change', usedClick)
     function newClick() {
@@ -65,7 +70,6 @@
             document.getElementById("newText").style.display = "none"
         }
     }
-
     function usedClick() {
         if (usedCheck.checked == true) {
             document.getElementById("usedText").style.display = "block"
@@ -74,7 +78,4 @@
             document.getElementById("usedText").style.display = "none"
         }
     }
-
-
-
 </script>
