@@ -54,6 +54,9 @@
     @Html.ActionLink("Rent this Instrument", "Create", "Clients", new { id = Model.rentalID }, null)
 </p>
 <p>
+    @Html.ActionLink("Add Renter", "AddClient", new { id = Model.rentalID })
+</p>
+<p>
     Current renter is Customer #@Html.DisplayFor(model => model.ClientID)
 </p>
 

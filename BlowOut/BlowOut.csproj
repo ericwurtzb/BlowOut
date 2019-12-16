@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Rental.cs" />
+    <Compile Include="Models\Rental_Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +196,8 @@
     <Content Include="Views\Clients\Edit.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Clients\Summary.cshtml" />
+    <Content Include="Views\Rental_Client\Index.cshtml" />
+    <Content Include="Views\Rentals\AddClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,6 +21,23 @@ namespace BlowOut.Controllers
             return View(db.Rentals.ToList());
         }
 
+        public ActionResult AddClient(int id)
+        {
+            Rental_Client rentalclient = new Rental_Client();
+
+            rentalclient.rental = db.Rentals.Find(id);
+            ViewBag.Names = db.Clients.ToList();
+            return View(rentalclient);
+        }
+
+        [HttpPost]
+        public ActionResult AddClient(Rental_Client rentalclient)
+        {
+            rentalclient.client = db.Clients.Find(rentalclient.rental.ClientID);
+
+            return View();
+        }
+
         // GET: Rentals/Details/5
         public ActionResult Details(int? id)
         {
